@@ -52,7 +52,7 @@ wget load_from = 'https://download.openmmlab.com/mmdetection/v3.0/mm_grounding_d
 ```
 Then use config files to pretrain TVCC
 ```
-./tools/dist_train.sh GroundingDINO/polyp_grounding_dino/grounding_dino_swin-t_pretrain_obj365.py n # gpu num, change as you want
+./tools/dist_train.sh TVCC/polyp_grounding_dino/config/GroundingDINO_Polyp_PhraseGrounding_config.py n # gpu num, change as you want
 ```
 TVCC evaluation:
 ```
