@@ -213,15 +213,6 @@ val_dataloader = dict(
         data_prefix=dict(img='images/val/'),
         pipeline=test_pipeline
         )
-    # dataset=dict(
-    #     type='MDETRStyleRefCocoDataset',
-    #     data_root=data_root,
-    #     ann_file='labels/val_refcoco.json',
-    #     data_prefix=dict(img='images/val/'),
-    #     test_mode=True,
-    #     return_classes=True,
-    #     pipeline=test_pipeline,
-    #     backend_args=None)
 )
 
 test_dataloader = dict(
@@ -240,11 +231,6 @@ val_evaluator = dict(
     ann_file=data_root + 'labels/val.json',
     metric='bbox',
     format_only=False
-    # type='RefExpMetric',
-    # ann_file=data_root + 'labels/val_refcoco.json',
-    # metric='bbox',
-    # iou_thrs=0.5,
-    # topk=(1, 5, 10)
     )
 
 test_evaluator=dict(
@@ -252,12 +238,6 @@ test_evaluator=dict(
     ann_file=data_root + 'labels/test.json',
     metric='bbox',
     format_only=False
-    
-    # type='RefExpMetric',
-    # ann_file=data_root + 'labels/test_refcoco.json',
-    # metric='bbox',
-    # iou_thrs=0.5,
-    # topk=(1, 5, 10)
     )
 optim_wrapper = dict(
     _delete_=True,

@@ -46,16 +46,16 @@ def parse_args():
         'Detect-Segment-Anything Demo', add_help=True)
     parser.add_argument('--image', type=str, help='path to image file')
     parser.add_argument('--det_config', type=str, 
-        default='/home/yxxie/master1/pancreas/MyTGSeg/LSAM/polyp_grounding_dino/config/GroundingDINO_BrainTumor_PhraseGrounding_config.py',help='path to det config file')
+        default='xxxx',help='path to det config file')
     parser.add_argument('--det_weight', type=str,
-        default='/mnt/data_ssd/yxxie/NewBrainMRI/checkpoints/best_coco_bbox_mAP_epoch_13.pth',help='path to det weight file')
+        default='xxxx',help='path to det weight file')
     
     parser.add_argument(
         '--sam-type',type=str,
         default='vit_h',choices=['vit_h', 'vit_l', 'vit_b'],help='sam type')
     parser.add_argument(
         '--sam-weight',type=str,
-        default='/mnt/data_ssd/yxxie/polyp/checkpoints/sam_vit_h_4b8939.pth',help='path to checkpoint file')
+        default='xxxx',help='path to checkpoint file')
     parser.add_argument(
         '--out-dir','-o',type=str,help='output directory')
     parser.add_argument(

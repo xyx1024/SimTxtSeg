@@ -13,12 +13,14 @@ Our contribution consists of two key components: an effective Textual-to-Visual 
 
 ## 🚀 Updates
 * `[2024.07.07]` We are excited to release : ✅dataset and ✅TVCC code.
+* `[2024.09.25]` We are excited to release : ✅TVHA code.
 
 
 ## 📖 Dataset Preparation
 * Dataset Download
     1. Polyp Dataset: [PolypGen](https://www.synapse.org/#!Synapse:syn26376615/wiki/613312) (data_C1 - data_C6 is used), [others](https://github.com/DengPingFan/PraNet) (including CVC-300 (60 samples), CVC-ClinicDB (612 samples), CVC-ColonDB (380 samples), ETIS-LaribPolypDB (196 samples), Kvasir (100 samples), Kvasir-SEG (900 samples))
     2. Brain Tumor Dataset: [kaggle_3m](https://www.kaggle.com/datasets/nikhilroxtomar/brain-tumor-segmentation)
+    3. Isic Dataset: [ISIC](https://challenge.isic-archive.com/data/#2019)
 *  For TVCC, to avoid handcrafted prompting cost, <u>we use GPT-4 to generate a concise sentence within 20 words</u>. Before training, you need to transform your dataset into **ODVG** format for precise alignment of regions and phrases. **coco** format label is also required for test and validation.
     ```
     python util/mask2odvg.py
@@ -39,19 +41,22 @@ cuda 12.1
 ```
 conda create -n SimTxtSeg python=3.11
 conda activate SimTxtSeg
-
 git clone https://github.com/xyx1024/SimTxtSeg.git
+pip install -t requirements.txt
 ```
 
 see [mmdet_get_started_中文](https://github.com/open-mmlab/mmdetection/blob/cfd5d3a985b0249de009b67d04f37263e11cdf3d/docs/zh_cn/get_started.md) or [mmdet_get_started_english](https://github.com/open-mmlab/mmdetection/blob/cfd5d3a985b0249de009b67d04f37263e11cdf3d/docs/en/get_started.md) to install mmdet. 
 
 ### 2. For TVCC 
+download swin_tiny_patch4_window7_224.pth : https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth
+
 download grounding-dino checkpoints: 
 ```
 wget load_from = 'https://download.openmmlab.com/mmdetection/v3.0/mm_grounding_dino/grounding_dino_swin-t_pretrain_obj365_goldg_grit9m_v3det/grounding_dino_swin-t_pretrain_obj365_goldg_grit9m_v3det_20231204_095047-b448804b.pth' # noqa
 ```
-Then use config files to pretrain TVCC
+Then use config files to pretrain TVCC：support polyp dataset, brain tumor dataset, isic dataset.
 ```
+cd TVCC/polyp_grounding_dino
 ./tools/dist_train.sh TVCC/polyp_grounding_dino/config/GroundingDINO_Polyp_PhraseGrounding_config.py n # gpu num, change as you want
 ```
 TVCC evaluation:
@@ -64,7 +69,7 @@ python tools/test.py config_path ckpt_path
 ```
 visual cues visualize:
 ```
-python demo/image_demo.py 
+python tools/image_demo.py 
         image_path \
         config_path \
         --weights weight_path \
@@ -85,7 +90,11 @@ cd TVCC/polyp_grounding_dino
 python TVCC_Sam.py
 ```
 ### 4. SimTxtSeg with TVHA
-The model is coming.
+use pseudo mask and text prompt to supervise model.
+```
+python train.py
+python test.py
+```
 
 ## 🎯 Results
 **Comparison experiments and Ablation study:**
@@ -100,8 +109,7 @@ The model is coming.
 - [x] paper release
 - [x] dataset release
 - [x] TVCC pretrain and test code release
-- [ ] TVCC pretrained checkpoints release.
-- [ ] SimTxtSeg with TVHA model release.
+- [x] SimTxtSeg with TVHA model release.
 
 ## 🎫 License
 This project is released under the Apache 2.0 license.

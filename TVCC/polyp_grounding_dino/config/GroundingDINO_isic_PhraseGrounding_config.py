@@ -3,10 +3,10 @@ _base_ = [
     'basic/schedule_1x.py', 'basic/default_runtime.py'
 ]
 
-pretrained = '/mnt/data_ssd/yxxie/polyp/checkpoints/swin_tiny_patch4_window7_224.pth'  # noqa
+pretrained = '/mnt/data_ssd/yxxie/pretrained/swin_tiny_patch4_window7_224.pth'  # noqa
 lang_model_name = 'bert-base-uncased'
-data_root='/mnt/data_ssd/yxxie/NewBrainMRI/'
-class_name=('brain tumor',)
+data_root='/mnt/data_ssd/yxxie/ISIC2018/dataset/'
+class_name=('melanoma',)
 metainfo = dict(classes=class_name, palette=[(220, 20, 60)])
 model = dict(
     type='GroundingDINO',
@@ -200,7 +200,7 @@ train_dataloader = dict(
         data_root=data_root,
         pipeline=train_pipeline,
         filter_cfg=dict(filter_empty_gt=False),
-        ann_file='train_odvg.json',
+        ann_file='labels/train_odvg.json',
         data_prefix=dict(img='images/train')
         ))
 
@@ -209,7 +209,7 @@ val_dataloader = dict(
         metainfo=metainfo,
         data_root=data_root,
         return_classes=True,
-        ann_file='val.json',
+        ann_file='labels/val_coco.json',
         data_prefix=dict(img='images/val/'),
         pipeline=test_pipeline
         )
@@ -220,7 +220,7 @@ test_dataloader = dict(
         metainfo=metainfo,
         data_root=data_root,
         return_classes=True,
-        ann_file='test.json',
+        ann_file='labels/test_coco.json',
         data_prefix=dict(img='images/test/'),
         pipeline=test_pipeline,
         )
@@ -228,14 +228,14 @@ test_dataloader = dict(
 
 val_evaluator = dict(
     type='CocoMetric',
-    ann_file=data_root + '/val.json',
+    ann_file=data_root + 'labels/val_coco.json',
     metric='bbox',
     format_only=False
     )
 
 test_evaluator=dict(
     type='CocoMetric',
-    ann_file=data_root + '/test.json',
+    ann_file=data_root + 'labels/test_coco.json',
     metric='bbox',
     format_only=False
     )
@@ -274,4 +274,4 @@ auto_scale_lr = dict(base_batch_size=8)
 default_hooks = dict(visualization=dict(type='GroundingVisualizationHook'),
                      checkpoint=dict(max_keep_ckpts=1, save_best='auto'))
 
-load_from= "/mnt/data_ssd/yxxie/polyp/checkpoints/grounding_dino_swin-t_pretrain_obj365_goldg_grit9m_v3det_20231204_095047-b448804b.pth"
+load_from= "/mnt/data_ssd/yxxie/pretrained/grounding_dino_swin-t_pretrain_obj365_goldg_grit9m_v3det_20231204_095047-b448804b.pth"
