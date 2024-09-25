@@ -1,8 +1,8 @@
 '''
 Author: xyx1024 8333400+xyx1024@user.noreply.gitee.com
 Date: 2024-02-07 11:46:36
-LastEditors: xyx1024 8333400+xyx1024@user.noreply.gitee.com
-LastEditTime: 2024-09-24 13:19:02
+LastEditors: silver
+LastEditTime: 2024-09-25 10:24:55
 FilePath: /pancreas/MyTGSeg/models/model.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -81,11 +81,11 @@ class Comprehensive_Atten_Decoder(nn.Module):
         up3=self.fusion2(up3,txt_embeds)#[b,384,48,48]
         up3, att_weight3 = self.up3(up3)#[b,192,48,48]
 
-        up2 = self.up_concat2(vis_embeds[0], up3)#[1,64,128,128]
-        up2=self.fusion3(up2,txt_embeds)#[b,192,96,96]
-        up2, att_weight2 = self.up2(up2)#[1,32,128,128]
+        up2 = self.up_concat2(vis_embeds[0], up3)
+        up2=self.fusion3(up2,txt_embeds)
+        up2, att_weight2 = self.up2(up2)
 
-        up1 = self.up1(up2) #[1,24,512,512]
+        up1 = self.up1(up2) 
         return up1
         
 
