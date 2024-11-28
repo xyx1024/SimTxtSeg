@@ -124,7 +124,15 @@ Segment Anything: https://github.com/facebookresearch/segment-anything?tab=readm
 ## ✒️ Citation
 If you find this repository useful, please consider citing this paper:
 ```
-@article{
+@InProceedings{Xie_SimTxtSeg_MICCAI2024,
+        author = { Xie, Yuxin and Zhou, Tao and Zhou, Yi and Chen, Geng},
+        title = { { SimTxtSeg: Weakly-Supervised Medical Image Segmentation with Simple Text Cues } },
+        booktitle = {proceedings of Medical Image Computing and Computer Assisted Intervention -- MICCAI 2024},
+        year = {2024},
+        publisher = {Springer Nature Switzerland},
+        volume = {LNCS 15008},
+        month = {October},
+        page = {634 -- 644}
 }
 ```
 ## 📬 Contact
