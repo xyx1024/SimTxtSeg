@@ -33,16 +33,11 @@ Our contribution consists of two key components: an effective Textual-to-Visual 
 
 Clone the whole repository and install the dependencies.
 
-Python 3.11.9
-
-PyTorch 2.3.1
-
-cuda 12.1
 ```
 conda create -n SimTxtSeg python=3.11
 conda activate SimTxtSeg
 git clone https://github.com/xyx1024/SimTxtSeg.git
-pip install -t requirements.txt
+pip install -r requirements.txt
 ```
 
 see [mmdet_get_started_中文](https://github.com/open-mmlab/mmdetection/blob/cfd5d3a985b0249de009b67d04f37263e11cdf3d/docs/zh_cn/get_started.md) or [mmdet_get_started_english](https://github.com/open-mmlab/mmdetection/blob/cfd5d3a985b0249de009b67d04f37263e11cdf3d/docs/en/get_started.md) to install mmdet. 
